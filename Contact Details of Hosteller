@@ -1,0 +1,265 @@
+Question
+
+
+Contact Details of Hosteller
+
+SNMR College of Engineering and Technology wants to create an application to store their students details as well as the details of hostellers.
+
+In case of any changes to be made to the attributes,  admin can update the details like room number and phone number of the hosteler.
+
+Develop a program to implement this scenario.
+
+Create a public class Student with  protected attributes :
+
+int studentId
+
+String name
+
+int departmentId
+
+String gender
+
+String phone
+
+ 
+
+Create a public class Hosteller with private attributes
+
+ 
+
+String hostelName
+
+int roomNumber
+
+Make this class inherit the Student class, as it holds all the properties of Student. 
+
+Use appropriate public getters and setters for both the classes.
+
+Write a class Main with the main function.
+
+In Main class get the input of the hosteller using the method :
+
+public static Hosteller getHostellerDetails().
+
+Invoke this method from the main method and then modify the room number and phone number, if needed.
+
+Sample Input 1:
+
+Enter the Details:
+Student Id
+1
+Student Name
+John
+Department Id
+101
+Gender
+Male
+Phone Number
+9876543210
+Hostel Name
+YMCA
+Room Number
+10
+Modify Room Number(Y/N)
+Y
+New Room Number
+11
+Modify Phone Number(Y/N)
+Y
+New Phone Number
+9876543121
+
+
+Sample Output 1:
+
+
+The Student Details
+1 John 101 Male 9876543121 YMCA 11
+
+Sample Input 2:
+Enter the Details:
+Student Id
+2
+Student Name
+John Paul
+Department Id
+112
+Gender
+Male
+Phone Number
+9885526536
+Hostel Name
+YMBA
+Room Number
+5
+Modify Room Number(Y/N)
+N
+Modify Phone Number(Y/N)
+N
+
+
+Sample Output 2:
+The Student Details:
+2 John Paul 112 Male 9885526536 YMBA 5
+
+
+Student.java
+
+import java.util.*;
+public class Student {
+	protected int studentId;
+	protected String name;
+	protected int departmentId;
+	protected String gender;
+	protected String phone;
+	char modifyPhone;
+	String newPhoneNumber;
+	Scanner s = new Scanner(System.in);
+	public int getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public void getmodifyPhone() {
+		System.out.println("Modify Phone Number(Y/N)");
+		modifyPhone = s.next().charAt(0);
+		s.nextLine();
+		if(modifyPhone == 'Y')
+			getNewPhone();
+	}
+	public void setmodifyPhone() {
+		if(modifyPhone == 'Y')
+			getNewPhone();
+	}
+	public String getNewPhone() {
+		System.out.println("New Phone Number");
+		newPhoneNumber = s.nextLine();
+		phone = newPhoneNumber;
+		return phone;
+	}
+	public void setNewPhone() {
+	    
+	}
+}
+
+
+Hosteller.java
+
+import java.util.*;
+public class Hosteller extends Student{
+	private String hostelName;
+	private int roomNumber;
+	protected char modifyRoomNumber;
+	protected int newRoomNumber;
+	Scanner s = new Scanner(System.in);
+	public String getHostelName() {
+		return hostelName;
+	}
+	public void setHostelName(String hostelName) {
+		this.hostelName = hostelName;
+	}
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+	public void getmodifyRoomNumber() {
+		System.out.println("Modify Room Number(Y/N)");
+		modifyRoomNumber = s.next().charAt(0);
+		s.nextLine();
+		if(modifyRoomNumber == 'Y')
+			getNewRoomNumber();
+		else if(modifyRoomNumber == 'N')
+			setmodifyPhone();
+	}
+	public void setmodifyRoomNumber() {
+	    
+	}
+	public int getNewRoomNumber() {
+		System.out.println("New Room Number");
+		newRoomNumber = s.nextInt();
+		s.nextLine();
+		roomNumber = newRoomNumber;
+		return roomNumber;
+	}
+	public void setNewRoomNumber() {
+	    
+	}
+
+}
+
+
+Main.java
+
+
+import java.util.*;
+public class Main {
+	public static Hosteller getHostellerDetails()
+	{
+		Scanner sc = new Scanner(System.in);
+		Hosteller h = new Hosteller();
+		System.out.println("Enter the Details:");
+		System.out.println("Student Id");
+		h.setStudentId(sc.nextInt());
+		System.out.println("Student Name");
+		h.setName(sc.next());
+		System.out.println("Department Id");
+		h.setDepartmentId(sc.nextInt());
+		System.out.println("Gender");
+		h.setGender(sc.next());
+		System.out.println("Phone Number");
+		h.setPhone(sc.next());
+		System.out.println("Hostel Name");
+		h.setHostelName(sc.next());
+		System.out.println("Room Number");
+		h.setRoomNumber(sc.nextInt());
+//		System.out.println("Modify Room Number(Y/N)");
+//		char modifyRoomNumber = sc.next().charAt(0);
+//		if(modifyRoomNumber == 'Y')
+//			h.newRoomNumber();
+//		else if(modifyRoomNumber == 'N')
+//			;
+		h.getmodifyRoomNumber();
+		h.getmodifyPhone();
+		return h;
+	}
+	public static void main(String[] args) {
+		new Scanner(System.in);
+		Hosteller h = getHostellerDetails();
+		System.out.println("The Student Details");
+		System.out.print(h.getStudentId() + " ");
+		System.out.print(h.getName() + " ");
+		System.out.print(h.getDepartmentId() + " ");
+		System.out.print(h.getGender() + " ");
+		System.out.print(h.getPhone() + " ");
+		System.out.print(h.getHostelName() + " ");
+		System.out.print(h.getRoomNumber());
+	}
+
+}
